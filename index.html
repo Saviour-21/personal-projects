@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="menu">
+        <option name="menu">---select---</option>
+
+    </select>
+</body>
+<script>
+    var i;
+    var a = document.getElementById('menu');
+    var OurRequest = new XMLHttpRequest();
+    OurRequest.open('GET','https://davids-restaurant.herokuapp.com/menu_items.json');
+    console.log("yes");
+    OurRequest.onload = function(){
+        var menu = JSON.parse(OurRequest.responseText);
+        for(i = 0; i < menu['menu_items'].length; i++){
+            a.innerHTML = a.innerHTML + "<option value ='" + menu['menu_items'][i].id + "'>" + menu['menu_items'][i].name + "</option>";
+        }
+    };
+    OurRequest.send();
+</script>
+</html>
